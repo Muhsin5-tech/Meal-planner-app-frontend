@@ -22,7 +22,7 @@ const MealList = () => {
   };
 
   const handleDelete = (mealId) => {
-    fetch(`https://meal-planner-app-backend.onrender.com/${mealId}`, {
+    fetch(`https://meal-planner-app-backend.onrender.com/meals/${mealId}`, {
       method: 'DELETE',
     })
       .then(() => {
@@ -37,11 +37,11 @@ const MealList = () => {
   };
 
   const handleUpdate = (updatedMeal) => {
-    fetch(`https://meal-planner-app-backend.onrender.com/${updatedMeal.id}`, {
+    fetch(`https://meal-planner-app-backend.onrender.com/meals/${updatedMeal.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer your-token-here'
+        'Authorization': 'Bearer your-token-here',
       },
       body: JSON.stringify(updatedMeal),
     })
@@ -66,11 +66,7 @@ const MealList = () => {
       <h2>Meal List</h2>
 
       {editingMeal ? (
-        <MealEditForm
-          meal={editingMeal}
-          onUpdate={handleUpdate}
-          onCancel={handleCancelEdit}
-        />
+        <MealForm mealToEdit={editingMeal} onAddMeal={handleAddMeal} onEditMeal={handleUpdate} />
       ) : (
         <MealForm onAddMeal={handleAddMeal} />
       )}

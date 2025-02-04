@@ -18,8 +18,7 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    // Frontend validation before submitting
+
     if (!name || !ingredients || !instructions || !imageUrl) {
       setError('All fields are required.');
       return;
@@ -28,8 +27,7 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
     const newMeal = { name, ingredients, instructions, image_url: imageUrl };
 
     if (mealToEdit) {
-      // Edit meal
-      fetch(`https://meal-planner-app-backend.onrender.com/${mealToEdit.id}`, {
+      fetch(`https://meal-planner-app-backend.onrender.com/meals/${mealToEdit.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newMeal),
@@ -45,7 +43,6 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
         })
         .catch((error) => console.error('Error updating meal:', error));
     } else {
-      // Add new meal
       fetch('https://meal-planner-app-backend.onrender.com/meals', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -53,7 +50,7 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          onAddMeal(data.meal);
+          onAddMeal(data);
           setName('');
           setIngredients('');
           setImageUrl('');
@@ -67,7 +64,7 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
   return (
     <form onSubmit={handleSubmit} className="meal-form">
       <h2>{mealToEdit ? 'Edit Meal' : 'Add a New Meal'}</h2>
-      {error && <div className="error-message">{error}</div>} {/* Display error message */}
+      {error && <div className="error-message">{error}</div>}
       <label>
         Name:
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -88,6 +85,5 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
     </form>
   );
 };
-
 
 export default MealForm;
