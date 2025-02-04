@@ -36,12 +36,12 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
       })
         .then((response) => response.json())
         .then((updatedMeal) => {
-          onEditMeal(updatedMeal); // Immediately reflect the updated meal
+          onEditMeal(updatedMeal);
           setName('');
           setIngredients('');
           setImageUrl('');
           setInstructions('');
-          setError('');  // Clear error if the form is valid
+          setError('');
         })
         .catch((error) => console.error('Error updating meal:', error));
     } else {
@@ -53,12 +53,12 @@ const MealForm = ({ onAddMeal, mealToEdit, onEditMeal }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          onAddMeal(data.meal); // Immediately reflect the added meal
+          onAddMeal(data.meal);
           setName('');
           setIngredients('');
           setImageUrl('');
           setInstructions('');
-          setError('');  // Clear error if the form is valid
+          setError('');
         })
         .catch((error) => console.error('Error adding meal:', error));
     }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../index.css";
 
 const Home = () => {
@@ -7,8 +8,8 @@ const Home = () => {
       <h1>Welcome to the Meal Planner App</h1>
       <p>Plan your meals efficiently and stay on track with your diet.</p>
       <div className="nav-buttons">
-        <a href="/meals" className="button">View Meals</a>
-        <a href="/dayplans" className="button">Plan Your Week</a>
+        <Link to="/meals" className="button">View Meals</Link>
+        <Link to="/dayplans" className="button">Plan Your Week</Link>
       </div>
     </div>
   );
